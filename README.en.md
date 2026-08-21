@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | English
 
-[![skills.sh](https://skills.sh/b/chengyf2004/who-read-your-words)](https://skills.sh/chengyf2004/who-read-your-words/who-read-your-words)
+[![skills.sh](https://skills.sh/b/chengyf2004/who-reads-your-words)](https://skills.sh/chengyf2004/who-reads-your-words/who-reads-your-words)
 
 ## Have you ever run into either of these?
 
@@ -12,9 +12,9 @@
 
 Both outputs follow the instruction literally, yet lose sight of the document's actual readers. False starts, editing instructions, and rejected material are internal inputs that help complete a task. When they cross the audience boundary into the delivered artifact, the result is **internal process leakage**.
 
-`who-read-your-words` starts by asking: **Who will read these words, and what does that reader actually need to know?**
+`who-reads-your-words` starts by asking: **Who will read these words, and what does that reader actually need to know?**
 
-`who-read-your-words` is a Codex skill for keeping outward-facing text aligned with the people who will actually read it.
+`who-reads-your-words` is a Codex skill for keeping outward-facing text aligned with the people who will actually read it.
 
 It prevents task instructions, revision chatter, rejected ideas, and agent activity from leaking into artifacts that have a different audience. A README stays a README, a pull request describes the project change, and a direct update can still tell the requester what was completed.
 
@@ -49,13 +49,13 @@ Negative statements are not banned. Limitations, incompatibilities, security bou
 Install it globally for Codex with the [skills CLI](https://skills.sh/docs/cli):
 
 ```bash
-npx skills add Chengyf2004/Who-Read-Your-Words --skill who-read-your-words --agent codex -g -y
+npx skills add Chengyf2004/Who-Reads-Your-Words --skill who-reads-your-words --agent codex -g -y
 ```
 
 Or use GitHub CLI:
 
 ```bash
-gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent codex --scope user
+gh skill install Chengyf2004/Who-Reads-Your-Words who-reads-your-words --agent codex --scope user
 ```
 
 ## Use
@@ -63,13 +63,13 @@ gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent cod
 Invoke the skill explicitly when drafting an artifact:
 
 ```text
-Use $who-read-your-words to write a README for first-time users of this project.
+Use $who-reads-your-words to write a README for first-time users of this project.
 ```
 
 It can also review existing text:
 
 ```text
-Use $who-read-your-words to review this PR description for audience mismatch and task-process leakage.
+Use $who-reads-your-words to review this PR description for audience mismatch and task-process leakage.
 ```
 
 ## Audit existing text
@@ -77,7 +77,7 @@ Use $who-read-your-words to review this PR description for audience mismatch and
 The included linter provides a deterministic first pass for Markdown and plain text:
 
 ```bash
-python skills/who-read-your-words/scripts/audit_external_text.py README.md --profile state
+python skills/who-reads-your-words/scripts/audit_external_text.py README.md --profile state
 ```
 
 Select `state`, `change`, `decision`, or `direct` to match the artifact. Errors identify strong audience-boundary failures. Warnings require a reader-value decision and are not automatic deletion instructions.
@@ -89,7 +89,7 @@ Use `--fail-on warning` for a stricter CI gate or `--verbose` to display the fla
 Run the audit tests with Python's standard library:
 
 ```bash
-python -m unittest discover -s skills/who-read-your-words/scripts -p "test_*.py" -v
+python -m unittest discover -s skills/who-reads-your-words/scripts -p "test_*.py" -v
 ```
 
 The test cases cover clean current-state writing, reader-relevant limitations, project change records, direct acknowledgements, hidden conversation dependencies, migration sections, fenced examples, and process-oriented headings.
@@ -97,13 +97,13 @@ The test cases cover clean current-state writing, reader-relevant limitations, p
 ## Repository structure
 
 ```text
-who-read-your-words/
+who-reads-your-words/
 ├── README.md
 ├── README.en.md
 ├── LICENSE
 ├── .gitignore
 └── skills/
-    └── who-read-your-words/
+    └── who-reads-your-words/
         ├── SKILL.md
         ├── agents/
         │   └── openai.yaml

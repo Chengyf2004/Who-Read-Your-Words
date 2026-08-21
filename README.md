@@ -2,7 +2,7 @@
 
 简体中文 | [English](README.en.md)
 
-[![skills.sh](https://skills.sh/b/chengyf2004/who-read-your-words)](https://skills.sh/chengyf2004/who-read-your-words/who-read-your-words)
+[![skills.sh](https://skills.sh/b/chengyf2004/who-reads-your-words)](https://skills.sh/chengyf2004/who-reads-your-words/who-reads-your-words)
 
 ## 你是否遇到过这些情况？
 
@@ -12,9 +12,9 @@
 
 这两种结果在字面上都执行了指令，却没有面向文档真正的读者。试错过程、修改指令和被否决的内容原本只是帮助 AI 完成任务的内部信息，最后却越过受众边界，进入了交付成品——这就是**内部过程泄露**。
 
-`who-read-your-words` 会在写作前先问：**谁会读这些文字？这个读者真正需要知道什么？**
+`who-reads-your-words` 会在写作前先问：**谁会读这些文字？这个读者真正需要知道什么？**
 
-`who-read-your-words` 是一个 Codex Skill，用来让所有面向外部读者的文字始终服务于真正会读到它们的人。
+`who-reads-your-words` 是一个 Codex Skill，用来让所有面向外部读者的文字始终服务于真正会读到它们的人。
 
 它能避免任务指令、修改过程、已放弃的方案和智能体操作泄露到受众不同的成品中。README 应当像 README，Pull Request 应当说明项目发生了什么变化，而面向委托人的进度回复仍然可以交代已经完成的工作。
 
@@ -49,13 +49,13 @@
 推荐使用 [skills CLI](https://skills.sh/docs/cli) 安装到 Codex 的用户级 Skills 目录：
 
 ```bash
-npx skills add Chengyf2004/Who-Read-Your-Words --skill who-read-your-words --agent codex -g -y
+npx skills add Chengyf2004/Who-Reads-Your-Words --skill who-reads-your-words --agent codex -g -y
 ```
 
 也可以使用 GitHub CLI：
 
 ```bash
-gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent codex --scope user
+gh skill install Chengyf2004/Who-Reads-Your-Words who-reads-your-words --agent codex --scope user
 ```
 
 ## 使用
@@ -63,13 +63,13 @@ gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent cod
 编写对外文档时，可以显式调用这个 Skill：
 
 ```text
-使用 $who-read-your-words，为第一次接触此项目的用户编写 README。
+使用 $who-reads-your-words，为第一次接触此项目的用户编写 README。
 ```
 
 它也可以检查已经写好的文字：
 
 ```text
-使用 $who-read-your-words，检查这份 PR 描述是否存在受众错位或任务过程泄露。
+使用 $who-reads-your-words，检查这份 PR 描述是否存在受众错位或任务过程泄露。
 ```
 
 ## 审计现有文本
@@ -77,7 +77,7 @@ gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent cod
 仓库附带的检查器可以对 Markdown 和纯文本进行一次确定性的初步审计：
 
 ```bash
-python skills/who-read-your-words/scripts/audit_external_text.py README.md --profile state
+python skills/who-reads-your-words/scripts/audit_external_text.py README.md --profile state
 ```
 
 根据文档类型选择 `state`、`change`、`decision` 或 `direct`。错误表示存在明显的受众边界问题；警告需要结合读者价值判断，不能直接当作删除指令。
@@ -89,7 +89,7 @@ python skills/who-read-your-words/scripts/audit_external_text.py README.md --pro
 使用 Python 标准库运行审计测试：
 
 ```bash
-python -m unittest discover -s skills/who-read-your-words/scripts -p "test_*.py" -v
+python -m unittest discover -s skills/who-reads-your-words/scripts -p "test_*.py" -v
 ```
 
 测试覆盖清晰的当前状态写作、与读者有关的限制、项目变更记录、直接确认、依赖隐藏对话的表述、迁移章节、围栏代码示例以及以工作过程为中心的标题。
@@ -97,13 +97,13 @@ python -m unittest discover -s skills/who-read-your-words/scripts -p "test_*.py"
 ## 仓库结构
 
 ```text
-who-read-your-words/
+who-reads-your-words/
 ├── README.md
 ├── README.en.md
 ├── LICENSE
 ├── .gitignore
 └── skills/
-    └── who-read-your-words/
+    └── who-reads-your-words/
         ├── SKILL.md
         ├── agents/
         │   └── openai.yaml
