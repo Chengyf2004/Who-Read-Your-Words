@@ -44,18 +44,16 @@ Negative statements are not banned. Limitations, incompatibilities, security bou
 
 ## Install
 
-Clone the repository into the Codex skills directory.
-
-macOS or Linux:
+Install it globally for Codex with the [skills CLI](https://skills.sh/docs/cli):
 
 ```bash
-git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git ~/.codex/skills/who-read-your-words
+npx skills add Chengyf2004/Who-Read-Your-Words --skill who-read-your-words --agent codex -g -y
 ```
 
-Windows PowerShell:
+Or use GitHub CLI:
 
-```powershell
-git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git "$env:USERPROFILE\.codex\skills\who-read-your-words"
+```bash
+gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent codex --scope user
 ```
 
 ## Use
@@ -77,7 +75,7 @@ Use $who-read-your-words to review this PR description for audience mismatch and
 The included linter provides a deterministic first pass for Markdown and plain text:
 
 ```bash
-python scripts/audit_external_text.py README.md --profile state
+python skills/who-read-your-words/scripts/audit_external_text.py README.md --profile state
 ```
 
 Select `state`, `change`, `decision`, or `direct` to match the artifact. Errors identify strong audience-boundary failures. Warnings require a reader-value decision and are not automatic deletion instructions.
@@ -89,7 +87,7 @@ Use `--fail-on warning` for a stricter CI gate or `--verbose` to display the fla
 Run the audit tests with Python's standard library:
 
 ```bash
-python -m unittest discover -s scripts -p "test_*.py" -v
+python -m unittest discover -s skills/who-read-your-words/scripts -p "test_*.py" -v
 ```
 
 The test cases cover clean current-state writing, reader-relevant limitations, project change records, direct acknowledgements, hidden conversation dependencies, migration sections, fenced examples, and process-oriented headings.
@@ -101,15 +99,17 @@ who-read-your-words/
 ├── README.md
 ├── README.en.md
 ├── LICENSE
-├── SKILL.md
 ├── .gitignore
-├── agents/
-│   └── openai.yaml
-├── references/
-│   └── audience-contracts.md
-└── scripts/
-    ├── audit_external_text.py
-    └── test_audit_external_text.py
+└── skills/
+    └── who-read-your-words/
+        ├── SKILL.md
+        ├── agents/
+        │   └── openai.yaml
+        ├── references/
+        │   └── audience-contracts.md
+        └── scripts/
+            ├── audit_external_text.py
+            └── test_audit_external_text.py
 ```
 
 ## License

@@ -44,18 +44,16 @@
 
 ## 安装
 
-将仓库克隆到 Codex 的 Skills 目录。
-
-macOS 或 Linux：
+推荐使用 [skills CLI](https://skills.sh/docs/cli) 安装到 Codex 的用户级 Skills 目录：
 
 ```bash
-git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git ~/.codex/skills/who-read-your-words
+npx skills add Chengyf2004/Who-Read-Your-Words --skill who-read-your-words --agent codex -g -y
 ```
 
-Windows PowerShell：
+也可以使用 GitHub CLI：
 
-```powershell
-git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git "$env:USERPROFILE\.codex\skills\who-read-your-words"
+```bash
+gh skill install Chengyf2004/Who-Read-Your-Words who-read-your-words --agent codex --scope user
 ```
 
 ## 使用
@@ -77,7 +75,7 @@ git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git "$env:USERPROFI
 仓库附带的检查器可以对 Markdown 和纯文本进行一次确定性的初步审计：
 
 ```bash
-python scripts/audit_external_text.py README.md --profile state
+python skills/who-read-your-words/scripts/audit_external_text.py README.md --profile state
 ```
 
 根据文档类型选择 `state`、`change`、`decision` 或 `direct`。错误表示存在明显的受众边界问题；警告需要结合读者价值判断，不能直接当作删除指令。
@@ -89,7 +87,7 @@ python scripts/audit_external_text.py README.md --profile state
 使用 Python 标准库运行审计测试：
 
 ```bash
-python -m unittest discover -s scripts -p "test_*.py" -v
+python -m unittest discover -s skills/who-read-your-words/scripts -p "test_*.py" -v
 ```
 
 测试覆盖清晰的当前状态写作、与读者有关的限制、项目变更记录、直接确认、依赖隐藏对话的表述、迁移章节、围栏代码示例以及以工作过程为中心的标题。
@@ -101,15 +99,17 @@ who-read-your-words/
 ├── README.md
 ├── README.en.md
 ├── LICENSE
-├── SKILL.md
 ├── .gitignore
-├── agents/
-│   └── openai.yaml
-├── references/
-│   └── audience-contracts.md
-└── scripts/
-    ├── audit_external_text.py
-    └── test_audit_external_text.py
+└── skills/
+    └── who-read-your-words/
+        ├── SKILL.md
+        ├── agents/
+        │   └── openai.yaml
+        ├── references/
+        │   └── audience-contracts.md
+        └── scripts/
+            ├── audit_external_text.py
+            └── test_audit_external_text.py
 ```
 
 ## 许可证
