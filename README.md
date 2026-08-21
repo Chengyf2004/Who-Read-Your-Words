@@ -1,92 +1,96 @@
-# Who Reads Your Words?
+# 谁会读你写的文字？
 
-`who-read-your-words` is a Codex skill for keeping outward-facing text aligned with the people who will actually read it.
+简体中文 | [English](README.en.md)
 
-It prevents task instructions, revision chatter, rejected ideas, and agent activity from leaking into artifacts that have a different audience. A README stays a README, a pull request describes the project change, and a direct update can still tell the requester what was completed.
+`who-read-your-words` 是一个 Codex Skill，用来让所有面向外部读者的文字始终服务于真正会读到它们的人。
 
-## What it does
+它能避免任务指令、修改过程、已放弃的方案和智能体操作泄露到受众不同的成品中。README 应当像 README，Pull Request 应当说明项目发生了什么变化，而面向委托人的进度回复仍然可以交代已经完成的工作。
 
-Before drafting, the skill establishes an internal audience contract:
+## 它解决什么问题
 
-- who will read the text;
-- which channel and artifact type will carry it;
-- what the reader needs to understand or do;
-- which context the reader can reasonably possess;
-- whether the artifact represents current state, change, decision history, or direct conversation.
+开始写作前，这个 Skill 会在内部建立一份受众契约：
 
-Task instructions are treated as control information rather than automatic document content. The skill then builds an audience view from verified subject facts and applies two checks before delivery:
+- 谁会阅读这段文字；
+- 它将出现在哪个渠道、属于哪种文档；
+- 读者需要理解什么或采取什么行动；
+- 读者理应掌握哪些上下文；
+- 文档描述的是当前状态、一次变更、一项决策，还是一场直接对话。
 
-- **Orphan-reader test:** Can the intended reader understand and use the text without hidden task context?
-- **Counterfactual test:** For current-state writing, would every sentence still belong if the subject had always been in its present state?
+任务指令只用于控制写作，不会自动成为文档内容。随后，Skill 会根据已经确认的事实构建面向读者的内容，并在交付前执行两项检查：
 
-## Writing modes
+- **孤立读者测试：** 没有隐藏的任务上下文时，目标读者能否理解并使用这份文字？
+- **反事实测试：** 对于描述当前状态的文档，如果事物从一开始就是现在这样，其中每句话是否仍然应该存在？
 
-| Mode | Typical artifacts | What the reader needs |
+## 写作模式
+
+| 模式 | 常见文档 | 读者真正需要的内容 |
 |---|---|---|
-| `state` | README, user guide, API docs, landing page, UI copy | The current subject and its actionable boundaries |
-| `change` | PR, commit, changelog, release note, migration guide | What changed, why it matters, and its impact |
-| `decision` | ADR, proposal, postmortem, review response | Context, evidence, alternatives, rationale, and consequences |
-| `direct` | Email, support reply, stakeholder update, completion report | A useful answer, result, or next action in shared context |
+| `state` | README、用户指南、API 文档、落地页、界面文案 | 当前状态以及会影响行动的边界 |
+| `change` | PR、提交说明、更新日志、发布说明、迁移指南 | 改变了什么、为什么重要、会产生什么影响 |
+| `decision` | ADR、提案、复盘、评审回复 | 背景、证据、备选方案、理由和后果 |
+| `direct` | 邮件、支持回复、利益相关者更新、完成报告 | 基于共同上下文的有效答复、结果或下一步行动 |
 
-Negative statements are not banned. Limitations, incompatibilities, security boundaries, and deprecations belong when they change a reader decision. The distinction is whether the information serves the audience, not whether its wording is negative or historical.
+这个 Skill 并不排斥否定性内容。只要会影响读者的判断，限制、不兼容项、安全边界和弃用信息都应保留。关键不在于一句话是否定或涉及历史，而在于它是否真正服务于当前受众。
 
-## Install
+## 安装
 
-Clone the repository into the Codex skills directory.
+将仓库克隆到 Codex 的 Skills 目录。
 
-macOS or Linux:
+macOS 或 Linux：
 
 ```bash
-git clone https://github.com/Chengyf2004/who-read-your-words.git ~/.codex/skills/who-read-your-words
+git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git ~/.codex/skills/who-read-your-words
 ```
 
-Windows PowerShell:
+Windows PowerShell：
 
 ```powershell
-git clone https://github.com/Chengyf2004/who-read-your-words.git "$env:USERPROFILE\.codex\skills\who-read-your-words"
+git clone https://github.com/Chengyf2004/Who-Read-Your-Words.git "$env:USERPROFILE\.codex\skills\who-read-your-words"
 ```
 
-## Use
+## 使用
 
-Invoke the skill explicitly when drafting an artifact:
+编写对外文档时，可以显式调用这个 Skill：
 
 ```text
-Use $who-read-your-words to write a README for first-time users of this project.
+使用 $who-read-your-words，为第一次接触此项目的用户编写 README。
 ```
 
-It can also review existing text:
+它也可以检查已经写好的文字：
 
 ```text
-Use $who-read-your-words to review this PR description for audience mismatch and task-process leakage.
+使用 $who-read-your-words，检查这份 PR 描述是否存在受众错位或任务过程泄露。
 ```
 
-## Audit existing text
+## 审计现有文本
 
-The included linter provides a deterministic first pass for Markdown and plain text:
+仓库附带的检查器可以对 Markdown 和纯文本进行一次确定性的初步审计：
 
 ```bash
 python scripts/audit_external_text.py README.md --profile state
 ```
 
-Select `state`, `change`, `decision`, or `direct` to match the artifact. Errors identify strong audience-boundary failures. Warnings require a reader-value decision and are not automatic deletion instructions.
+根据文档类型选择 `state`、`change`、`decision` 或 `direct`。错误表示存在明显的受众边界问题；警告需要结合读者价值判断，不能直接当作删除指令。
 
-Use `--fail-on warning` for a stricter CI gate or `--verbose` to display the flagged source lines.
+使用 `--fail-on warning` 可以设置更严格的 CI 门槛，使用 `--verbose` 可以显示触发规则的原文行。
 
-## Validate
+## 验证
 
-Run the audit tests with Python's standard library:
+使用 Python 标准库运行审计测试：
 
 ```bash
 python -m unittest discover -s scripts -p "test_*.py" -v
 ```
 
-The test cases cover clean current-state writing, reader-relevant limitations, project change records, direct acknowledgements, hidden conversation dependencies, migration sections, fenced examples, and process-oriented headings.
+测试覆盖清晰的当前状态写作、与读者有关的限制、项目变更记录、直接确认、依赖隐藏对话的表述、迁移章节、围栏代码示例以及以工作过程为中心的标题。
 
-## Repository structure
+## 仓库结构
 
 ```text
 who-read-your-words/
 ├── README.md
+├── README.en.md
+├── LICENSE
 ├── SKILL.md
 ├── .gitignore
 ├── agents/
@@ -98,6 +102,10 @@ who-read-your-words/
     └── test_audit_external_text.py
 ```
 
-## Limits
+## 许可证
 
-The linter detects textual signals; it cannot determine audience relevance with complete semantic accuracy. Profile selection and the skill's audience tests remain the source of judgment. The audit reports possible problems without rewriting or deleting content automatically.
+本项目采用 [MIT License](LICENSE)。
+
+## 局限
+
+检查器只能识别文字中的特征，无法完全准确地判断一段内容对特定受众是否有价值。写作模式和 Skill 提供的受众测试仍然是最终判断依据。审计只报告潜在问题，不会自动改写或删除内容。
