@@ -101,4 +101,3 @@ who-read-your-words/
 ## Limits
 
 The linter detects textual signals; it cannot determine audience relevance with complete semantic accuracy. Profile selection and the skill's audience tests remain the source of judgment. The audit reports possible problems without rewriting or deleting content automatically.
-
