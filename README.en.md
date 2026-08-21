@@ -2,6 +2,12 @@
 
 [简体中文](README.md) | English
 
+> **The Dongpo pork left the dish, but not the document.**
+
+You ask an AI to write a recipe for tomato and eggs, but it adds Dongpo pork. You tell it to remove the pork. The final document is titled “Tomato and Eggs (Without Dongpo Pork)” and spends a full paragraph explaining why the dish does not need Dongpo pork.
+
+This is more than an incomplete deletion. It is **internal process leakage caused by an audience mismatch**: the model applies the edit but keeps the instruction and the rejected content as high-salience topics, exposing them to readers who never needed that history.
+
 `who-read-your-words` is a Codex skill for keeping outward-facing text aligned with the people who will actually read it.
 
 It prevents task instructions, revision chatter, rejected ideas, and agent activity from leaking into artifacts that have a different audience. A README stays a README, a pull request describes the project change, and a direct update can still tell the requester what was completed.
