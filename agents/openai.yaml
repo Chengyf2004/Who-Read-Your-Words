@@ -1,0 +1,4 @@
+interface:
+  display_name: "Who Reads Your Words?"
+  short_description: "Keep outward text aligned with its real audience"
+  default_prompt: "Use $who-read-your-words to draft this outward-facing text for its actual readers without leaking the task process."
