@@ -2,11 +2,15 @@
 
 [简体中文](README.md) | English
 
-> **The Dongpo pork left the dish, but not the document.**
+## Have you ever run into either of these?
 
-You ask an AI to write a recipe for tomato and eggs, but it adds Dongpo pork. You tell it to remove the pork. The final document is titled “Tomato and Eggs (Without Dongpo Pork)” and spends a full paragraph explaining why the dish does not need Dongpo pork.
+**A weekly report turns into a debugging log.** You ask an AI to turn a week of issues, commits, and investigation notes into a report for your manager. You want the manager to see: “Fixed intermittent login-service timeouts. The root cause was a conflict between the connection-pool configuration and retry policy; the fix is deployed and the service is stable.” The AI instead writes: “On Monday, we first tried optimizing database indexes, with no effect. On Tuesday, changing the connection-pool settings introduced a new error. On Wednesday, we discarded the original diagnosis and investigated the retry policy instead. At a later request, some investigation details were removed...” A report intended to communicate final progress becomes a trial-and-error transcript containing incorrect diagnoses, temporary actions, and even editing instructions.
 
-This is more than an incomplete deletion. It is **internal process leakage caused by an audience mismatch**: the model applies the edit but keeps the instruction and the rejected content as high-salience topics, exposing them to readers who never needed that history.
+**Deletion turns into repetition.** You ask an AI to remove a rejected Redis proposal from a technical document because its final readers have no reason to know it ever existed. The AI removes the original section but renames the document “System Design (Without Redis),” opens with “This document does not discuss Redis,” and adds a section titled “Why This Document Does Not Discuss Redis.” Redis disappears from the design but becomes the document's most visible topic.
+
+Both outputs follow the instruction literally, yet lose sight of the document's actual readers. False starts, editing instructions, and rejected material are internal inputs that help complete a task. When they cross the audience boundary into the delivered artifact, the result is **internal process leakage**.
+
+`who-read-your-words` starts by asking: **Who will read these words, and what does that reader actually need to know?**
 
 `who-read-your-words` is a Codex skill for keeping outward-facing text aligned with the people who will actually read it.
 
