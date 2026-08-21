@@ -1,6 +1,7 @@
 ---
 name: who-read-your-words
 description: Shape text intended for people outside the current work process around its actual audience, channel, and genre, preventing task instructions, revision chatter, and agent actions from leaking into the artifact. Use for documentation, PRs, issues, commits, reports, email, announcements, support replies, proposals, UI copy, and other outward-facing writing.
+license: MIT
 ---
 
 # Who Reads Your Words

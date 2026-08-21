@@ -2,6 +2,8 @@
 
 [简体中文](README.md) | English
 
+[![skills.sh](https://skills.sh/b/chengyf2004/who-read-your-words)](https://skills.sh/chengyf2004/who-read-your-words/who-read-your-words)
+
 ## Have you ever run into either of these?
 
 **A weekly report turns into a debugging log.** You ask an AI to turn a week of issues, commits, and investigation notes into a report for your manager. You want the manager to see: “Fixed intermittent login-service timeouts. The root cause was a conflict between the connection-pool configuration and retry policy; the fix is deployed and the service is stable.” The AI instead writes: “On Monday, we first tried optimizing database indexes, with no effect. On Tuesday, changing the connection-pool settings introduced a new error. On Wednesday, we discarded the original diagnosis and investigated the retry policy instead. At a later request, some investigation details were removed...” A report intended to communicate final progress becomes a trial-and-error transcript containing incorrect diagnoses, temporary actions, and even editing instructions.
